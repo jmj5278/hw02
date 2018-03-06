@@ -1,0 +1,120 @@
+---
+title: "hw02-minjoeng-jeong"
+author: "Minjeong Jeong"
+date: "2018-03-05 "
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.path = '../images/')
+```
+
+###setting up
+```{r}
+library(dplyr)
+library(ggplot2)
+source('../code/make-shots-data-script.R')
+```
+
+#5)summary tables
+5.1) Total Shots by player
+```{r Total shots by player}
+#Total shots by player
+Total_Shot<- shot_data %>%
+             select(shot_type, name) %>%
+             group_by(name) %>% 
+             summarise(total=length(shot_type)) %>%
+             arrange(desc(total))
+
+Total_Shot
+```
+  
+5.2) Effective shooting Percentage 
+```{r shooting percentage}
+#Effective shooting percentage
+eff_shot_per<-shot_data %>%
+               group_by(name) %>%
+             summarise(total_shots = length(shot_type), 
+                       made_shots =  sum(shot_made_flag == "made shot"), 
+                       percent_shot = made_shots/total_shots) %>%
+             arrange(desc(percent_shot))
+eff_shot_per
+
+#2PT Effective shooting percentage
+two_shot_per<-shot_data %>%
+               group_by(name) %>%
+               summarise(total_two_point= sum(shot_type == "2PT Field Goal"),
+               made_two_point = sum(shot_made_flag == "made shot" & shot_type == "2PT Field Goal"),
+               percent_two_point = made_two_point/total_two_point) %>%
+               arrange(desc(percent_two_point))
+two_shot_per
+
+#3PT Effective shooting percentage
+three_shot_per<-shot_data %>%
+                group_by(name)%>%
+                summarise(total_three_point = sum(shot_type == "3PT Field Goal"),
+                          made_three_point = sum(shot_made_flag== "made shot" & shot_type == '3PT Field Goal'),
+                          percent_three_point = made_three_point/total_three_point) %>%
+                arrange(desc(percent_three_point))
+three_shot_per
+```
+
+#6)shooting distance
+
+6.1) dplyr table
+```{r shooting distance}
+made_shot_prop<-shot_data %>%
+                group_by(shot_distance)%>%
+                summarise(made_shot_prop = (sum(shot_made_flag == 'made shot'))/length(shot_made_flag))
+made_shot_prop
+```
+
+6.2) ggplot
+```{r shot distance plot}
+ggplot(data=made_shot_prop)+
+  geom_point(aes(x=shot_distance, y=made_shot_prop))+
+   ggtitle(' Percentage of Shot Made by Distance')
+```
+
+*what do you observe? 
+
+>The shorter the shooting distance, the higher the chabge to succefully make a shot.
+
+*Can you confirm that the shorter the distance, the more effective the shot
+
+> Yes, overall we can confirm the fact. 
+However, the percentage of shot made in the range of short distance (0~20 feet) are pretty similar. 
+
+*Can you guesstimate a distance threshold beyond which the chance of making a successful shot is basically null?
+
+> After 35 feet, the percentage of shot made is basically null.
+
+*What distances tend to have a percentage of 50% or more? 
+
+> Within 3 feet, the percentage of shot made is 50% or more.
+
+
+#7 Total number of shots by minute of occurrence 
+
+```{r shots by minutes}
+shot_data %>%
+  group_by(minute, name) %>%
+  summarise(total = length(shot_type)) %>%
+  ggplot(aes(x = minute, y = total)) +
+  geom_rect(mapping = aes(xmin = 0, xmax = 12, ymin = 0, ymax = 60), fill = "light grey") +
+  geom_rect(mapping = aes(xmin = 24, xmax = 36, ymin = 0, ymax = 60), fill = "light grey") +
+  geom_point(color = "blue") +
+  facet_wrap(~name) +
+  geom_path(color = "blue") +
+  ggtitle('Total number of shots(by minute of occurence)')+
+  theme_minimal()
+```
+  
+*Description of the facetted graph ot total number of shots:
+
+>These graphs represent GSW players' total numberof shots by minute of occurence. 
+Andre Iguoadala tends to succefully make shots during 2nd and the latter half of third period. 
+Graymond Green makes shots during 1st and 2nd period. Kevin Durant steadily makes shots all periods. 
+Klay Thompson and Stephen curry display pretty similar tendencies. 
+The one interesting thing is when Klay has the lowest total number of shots made during 1st and 3rd period, curry has the highest total number of shots made at the same period.
+Probably it is because they have the same special ability,three-point field goals.    
