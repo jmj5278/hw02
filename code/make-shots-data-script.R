@@ -32,11 +32,11 @@ thompson<- read.csv('../data/klay-thompson.csv', stringsAsFactors = FALSE)
 curry<- read.csv('../data/stephen-curry.csv', stringsAsFactors = FALSE)
 
 #Added a column name
-iguodala<-mutate(iguodala, name= 'Andre iguodala')
-green<-mutate(green, name= 'Graymond Green')
-durant<-mutate(durant, name='Kevin Durant')
-thompson<-mutate(thompson, name='Klay Thompson')
-curry<-mutate(curry, name='Stephen Curry')
+iguodala$name<- 'Andre iguodala'
+green$name<- 'Draymond Green'
+durant$name<-'Kevin Durant'
+thompson$name<-'Klay Thompson'
+curry$name<-'Stephen Curry'
 
 #replace "n" and "y"
 iguodala$shot_made_flag[iguodala$shot_made_flag == "n"] <-"missed shot"
@@ -62,7 +62,7 @@ sink(file = '../output/andre-iguodala-summary.txt')
 summary(iguodala)
 sink()
 
-sink(file = '../output/graymond-green-summary.txt')
+sink(file = '../output/draymond-green-summary.txt')
 summary(green)
 sink()
 

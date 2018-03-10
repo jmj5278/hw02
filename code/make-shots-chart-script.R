@@ -7,12 +7,13 @@
 #                     'kevin-durant.csv'
 #                     'klay-thompson.csv'
 #                     'stephen-curry.csv'
+#                     'shot-data.csv'
 # Output(s): data file'andre-iguodala-shot-chart.pdf'
 #                     'draymond-green-shot-chart.pdf'
 #                     'kevin-durant-shot-chart.pdf'
 #                     'klay-thompson-shot-chart.pdf'
 #                     'stephen-curry-shot-chart.pdf'
-#                     
+#                     'gsw-shot-chart.pdf'
 # Author(s): Minjeong Jeong
 # Date: 03-05-2018
 # ===================================================================
