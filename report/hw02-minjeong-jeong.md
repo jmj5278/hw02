@@ -47,7 +47,7 @@ Total_Shot
     ## 1 Stephen Curry   1250
     ## 2 Klay Thompson   1220
     ## 3 Kevin Durant     915
-    ## 4 Graymond Green   578
+    ## 4 Draymond Green   578
     ## 5 Andre iguodala   371
 
 5.2) Effective shooting Percentage
@@ -70,7 +70,7 @@ eff_shot_per
     ## 2 Andre iguodala         371        192        0.518
     ## 3 Klay Thompson         1220        575        0.471
     ## 4 Stephen Curry         1250        584        0.467
-    ## 5 Graymond Green         578        245        0.424
+    ## 5 Draymond Green         578        245        0.424
 
 ``` r
 #2PT Effective shooting percentage
@@ -90,7 +90,7 @@ two_shot_per
     ## 2 Kevin Durant               643            390             0.607
     ## 3 Stephen Curry              563            304             0.540
     ## 4 Klay Thompson              640            329             0.514
-    ## 5 Graymond Green             346            171             0.494
+    ## 5 Draymond Green             346            171             0.494
 
 ``` r
 #3PT Effective shooting percentage
@@ -110,7 +110,7 @@ three_shot_per
     ## 2 Stephen Curry                687              280               0.408
     ## 3 Kevin Durant                 272              105               0.386
     ## 4 Andre iguodala               161               58               0.360
-    ## 5 Graymond Green               232               74               0.319
+    ## 5 Draymond Green               232               74               0.319
 
 6)shooting distance
 ===================
